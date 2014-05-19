@@ -1,0 +1,19 @@
+{
+  "name": "samsaara-access",
+  "version": "0.0.0",
+  "description": "node-samsaara-access ====================",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/arjunmehta/node-samsaara-access.git"
+  },
+  "author": "Arjun Mehta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/arjunmehta/node-samsaara-access/issues"
+  },
+  "homepage": "https://github.com/arjunmehta/node-samsaara-access"
+}
