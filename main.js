@@ -109,7 +109,7 @@ function access(options){
 
       clientScript: __dirname + '/client/samsaara-access.js', 
 
-      foundationMethods: {
+      main: {
         createAccess: createAccess,
         restrict: restrict
       },
