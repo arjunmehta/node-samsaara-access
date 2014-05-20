@@ -1,12 +1,12 @@
-var samsaara;
+var core;
 
 
 function initialize(samsaaraCore){
 
-  samsaara = samsaaraCore;
+  core = samsaaraCore;
 
 
-  if(samsaara.capability.identity === true){
+  if(samsaaraCore.capability.identity === true){
 
     AccessList.prototype.addUser = function(userID){
       this.users[userID] = true;
@@ -28,7 +28,7 @@ function initialize(samsaaraCore){
   }
 
 
-  if(samsaara.capability.groups === true){
+  if(samsaaraCore.capability.groups === true){
 
     AccessList.prototype.addGroup = function(groupName){
       this.groups[groupName] = true;
@@ -53,10 +53,10 @@ function initialize(samsaaraCore){
 
 
 function AccessList(accessObject){
-  if(samsaara.capability.identity === true && accessObject.users){
+  if(samsaaraCore.capability.identity === true && accessObject.users){
     this.users = arrayToObject(accessObject.users || []);
   }
-  if(samsaara.capability.groups === true && accessObject.groups){
+  if(samsaaraCore.capability.groups === true && accessObject.groups){
     this.groups = arrayToObject(accessObject.groups || []);
   }
 }

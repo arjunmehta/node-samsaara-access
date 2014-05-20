@@ -1,7 +1,5 @@
 function access(options){
 
-  var samsaara;
-
   var accesses = {}; // holds sessions associated with userID ie: sessions[sessionID] = userID;
 
   var accesslist = require("./accesslist");
@@ -72,12 +70,11 @@ function access(options){
     }
 
     connection.access[this.id + methodName] = false;
-    return createDud(methodName);   
+    return createDud(methodName, {});   
     
   }
 
-  function createDud(methodName){
-    var dud = {};
+  function createDud(methodName, dud){
     dud[methodName] = function(){};
     return dud;
   }
@@ -99,8 +96,7 @@ function access(options){
 
   return function access(samsaaraCore){
 
-    samsaara = samsaaraCore;
-    accesslist.initialize(samsaara);
+    accesslist.initialize(samsaaraCore);
     samsaaraCore.addClientFileRoute("samsaara-access.js", __dirname + '/client/samsaara-access.js');
 
     var exported = {
@@ -111,6 +107,7 @@ function access(options){
 
       main: {
         createAccess: createAccess,
+        access: accessList,
         restrict: restrict
       },
 
@@ -122,20 +119,18 @@ function access(options){
         AccessList: AccessList
       },
 
-      moduleFinalInitialize: function(){
+      finalize: function finalizeAccess(){
 
-        samsaara.constructors.NameSpace.prototype.hasAccess = hasAccess;
+        samsaaraCore.constructors.NameSpace.prototype.hasAccess = hasAccess;
 
-        if(samsaara.capability.groups){
-          samsaara.constructors.LocalGroup.prototype.hasAccess = hasAccess;
-          samsaara.constructors.GlobalGroup.prototype.hasAccess = hasAccess;
+        if(samsaaraCore.capability.groups){
+          samsaaraCore.constructors.LocalGroup.prototype.hasAccess = hasAccess;
+          samsaaraCore.constructors.GlobalGroup.prototype.hasAccess = hasAccess;
         }
-        if(samsaara.capability.contexts){
-          samsaara.constructors.Context.prototype.hasAccess = hasAccess;
+        if(samsaaraCore.capability.contexts){
+          samsaaraCore.constructors.Context.prototype.hasAccess = hasAccess;
         }
-
       }
-
     };
 
 
